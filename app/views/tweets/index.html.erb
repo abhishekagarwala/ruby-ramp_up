@@ -1,0 +1,32 @@
+<h1>Tweets</h1>
+
+
+<%= form_for :tweet, url: tweets_path do |f| %>
+    <p>
+        <%= f.label :body %><br>
+        <%= f.text_area :body %>
+    </p>
+
+    <p>
+        <%= f.submit %>
+    </p>
+<% end %>
+
+
+<table>
+    <tr>
+        <th>Sender</th>
+        <th>Tweet</th>
+        <th>Tweeted At</th>
+    </tr>
+
+    <% @tweets.each do |tweet| %>
+        <tr>
+            <td><%= tweet.user.username if tweet.user %></td>
+            <td><%= tweet.body %></td>
+            <td><%= tweet.created_at %></td>
+        </tr>
+    <% end %>
+</table>
+
+<%= link_to "Home", root_path, :method => :get %>

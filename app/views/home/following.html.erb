@@ -1,0 +1,33 @@
+<h3>Follow User :- </h3>
+<%= form_for :follow, url: follow_path do |f|%>
+    <% if @error %>
+        <div id="error_explanation">
+            <%= @error %>
+        </div>
+    <% end %>
+    <p>
+        <%= f.label :username %><br>
+        <%= f.text_field :username %>
+    </p>
+    <p>
+        <%= f.submit %>
+    </p>
+<% end %>
+
+<%= notice %>
+
+<% if !@following.empty? %>
+    <h3>Following:- </h3>
+    <ul>
+        <% @following.each do |f| %>
+            <li><%= f.following.username %> | <%= f.following.email %>
+                <%= button_to "UnFollow User", { action: "un_follow", id: f.following.id },
+                              method: :delete, data: { confirm: "Are you sure?" } %>
+            </li>
+        <% end %>
+    </ul>
+<% else %>
+    <h3>You are not following anyone right now!</h3>
+<% end %>
+
+<%= link_to "Home", root_path, :method => :get %>
