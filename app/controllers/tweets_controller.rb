@@ -5,11 +5,8 @@ class TweetsController < ApplicationController
     @tweet = Tweet.new(params[:tweet].permit(:body))
     @tweet.user_id = current_user.id
 
-    if @tweet.save
-      redirect_to tweets_path
-    else
-      render 'new'
-    end
+    @tweet.save
+    redirect_to tweets_path
   end
 
   def index
